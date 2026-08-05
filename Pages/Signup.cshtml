@@ -1,0 +1,41 @@
+﻿@page
+@model PracticeVault.Pages.SignupModel
+@{
+	ViewData["Title"] = "Sign Up";
+}
+<head>
+	<link rel="stylesheet" href="~/css/signup.css" />
+</head>
+
+
+<form method="post">
+	<div class="imgcontainer text-center">
+		<h1>Welcome!</h1>
+		<h2>Sign Up</h2>
+	</div>
+
+	<div class="container">
+		<label for="Username"><b>Username</b></label>
+		<input type="text" placeholder="Enter Username" for="user.Username" />
+
+		<label for="Email"><b>Email Address</b></label>
+		<input type="text" placeholder="Enter Email Address" for="user.Email" />
+
+		<label for="Password"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" for="user.Password" />
+
+		<span asp-validation-summary="All"></span>
+
+		<button type="submit">Submit</button>
+	</div>
+
+
+
+
+</form>
+<div class="container">
+	<button class="cancelbtn" onclick="window.location.href='/'">Cancel</button>
+	<span class="login">Already have an account? <a href="login">Log in</a></span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

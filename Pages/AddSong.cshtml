@@ -1,0 +1,95 @@
+﻿@page
+@model PracticeVault.Pages.AddSongModel
+@{
+    ViewData["Title"] = "Add Song";
+}
+
+<div class="song-form-page">
+    <h2>Add a New Song</h2>
+
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">Song Title</label>
+            <input type="text" class="form-control" placeholder="Song title" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Artist</label>
+            <input type="text" class="form-control" placeholder="Artist name" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Album</label>
+            <input type="text" class="form-control" placeholder="Album (optional)" />
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Tuning</label>
+                <div class="d-flex gap-2">
+                    <select class="form-select form-select-sm" style="max-width: 90px;">
+                        <option value="e">E</option>
+                        <option value="eb">Eb / D#</option>
+                        <option value="d">D</option>
+                        <option value="db">Db / C#</option>
+                        <option value="c">C</option>
+                        <option value="b">B</option>
+                        <option value="bb">Bb/ A#</option>
+                        <option value="a">A</option>
+                        <option value="ab">Ab / G#</option>
+                        <option value="g">G</option>
+                        <option value="gb">Gb/ F#</option>
+                        <option value="f">F</option>
+                    </select>
+
+                    <select class="form-select"">
+                        <option value="standard">Standard</option>
+                        <option value="drop">Drop</option>
+                        <option value="open">Open</option>
+                        <option value="other">Other</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Difficulty</label>
+                <select class="form-select">
+                    <option value="">Select difficulty</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Expert">Expert</option>
+                    <option value="Expertplus">Expert+</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Status</label>
+                <select class="form-select">
+                    <option value="Learn Later">Learn Later</option>
+                    <option value="Learning">Learning</option>
+                    <option value="Needs Work">Needs Work</option>
+                    <option value="Mastered">Mastered</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tab Link</label>
+            <input type="text" class="form-control" placeholder="https://..." />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Notes</label>
+            <textarea class="form-control" rows="3" placeholder="Practice notes..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Song</button>
+        <a asp-page="/Library" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

@@ -1,0 +1,19 @@
+﻿#SongTable {
+    border: 1px solid white;
+}
+.form-control {
+    background-color: #2a2a40;
+    border-color: #3a3a52;
+    color: #e6e6e6;
+}
+
+.form-control:focus {
+    background-color: #2a2a40;
+    border-color: #4ecdc4;
+    color: #e6e6e6;
+    box-shadow: 0 0 0 0.25rem rgba(78, 205, 196, 0.25);
+}
+
+.form-control::placeholder {
+    color: #a0a0b8;
+}

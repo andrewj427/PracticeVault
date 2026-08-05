@@ -1,0 +1,90 @@
+﻿@page
+@model PracticeVault.Pages.LibraryModel
+@{
+	ViewData["Title"] = "My Library";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Library.css" />
+</head>
+<div class="text-center">
+    <h1 class="display-4">Library</h1>
+</div>
+<div class="d-flex align-items-center mb-3 flex-wrap gap-2">
+    <input type="text" class="form-control flex-grow-1" placeholder="Search songs..." style="min-width: 200px;">
+
+    <select class="form-select" style="width: auto;">
+        <option value="">All Tunings</option>
+        <option value="standard">Standard</option>
+        <option value="drop">Drop</option>
+        <option value="drop">Open</option>
+
+    </select>
+
+    <select class="form-select" style="width: auto;">
+        <option value="">All Difficulties</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+        <option value="expert">Expert</option>
+        <option value="expertplus">Expert+</option>
+
+
+    </select>
+
+    <select class="form-select" style="width: auto;">
+        <option value="">All Statuses</option>
+        <option value="learning">Learning</option>
+        <option value="mastered">Mastered</option>
+        <option value="needs-work">Needs Work</option>
+        <option value="learn-later">Learn Later</option>
+
+    </select>
+
+    <a class="btn btn-primary" asp-page="/AddSong">Add Song</a>
+</div>
+<table class="table text-white" id="SongTable">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Song Name / Tab link</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Difficulty</th>
+            <th scope="col">Tuning</th>
+            <th scope="col">Notes</th>
+            <th scope="col">Status</th>
+            <th scope="col"> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td><a href="https://www.songsterr.com/a/wsa/trivium-the-heart-from-your-hate-solo-tab-s436515t0">The Heart From Your Hate</a></td>
+            <td>Trivium</td>
+            <td>Medium</td>
+            <td>Eb Standard</td>
+            <td>Easy beginning riff, 7 string tuning</td>
+            <td>Learning</td>
+            <td><a href="EditSong">Edit</a></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td><a href="https://www.songsterr.com/a/wsa/avenged-sevenfold-heretic-tab-s384661">Heretic</a></td>
+            <td>Avenged Sevenfold</td>
+            <td>Hard</td>
+            <td>Drop D</td>
+            <td>Cool solo</td>
+            <td>Learn Later</td>
+            <td><a href="EditSong">Edit</a></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+			<td><a href="https://www.songsterr.com/a/wsa/guns-n-roses-sweet-child-o-mine-tab-s23">Sweet Child O' Mine</a></td>
+            <td>Guns N' Roses</td>
+            <td>Medium</td>
+            <td>Eb Standard</td>
+            <td>75% speed on solo</td>
+            <td>Learning</td>
+            <td><a href="EditSong">Edit</a></td>
+        </tr>
+    </tbody>
+</table>
