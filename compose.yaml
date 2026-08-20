@@ -1,0 +1,38 @@
+﻿services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: practicevault-web
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: .
+      dockerfile: PracticeVaultAPI/Dockerfile
+    container_name: practicevault-api
+    ports:
+      - "8081:8080"
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    depends_on:
+      - database
+
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: practicevault-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "PracticeVault123!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - practicevault-data:/var/opt/mssql
+
+volumes:
+  practicevault-data:
