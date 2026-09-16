@@ -38,4 +38,4 @@ jobs:
             export EXTERNAL_PORT="${{ secrets.EXTERNAL_PORT }}"
             export MSSQL_SA_PASSWORD="${{ secrets.MSSQL_SA_PASSWORD }}"
 
-            sudo -E docker compose -f compose.yaml -f compose.prod.yaml up -d --build
+            echo "${{ secrets.SERVER_PASSWORD }}" | sudo -S -E docker compose -f compose.yaml -f compose.prod.yaml up -d --build
