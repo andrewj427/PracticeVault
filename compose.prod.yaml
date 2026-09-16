@@ -1,0 +1,10 @@
+services:
+  web:
+    ports:
+      - "${EXTERNAL_PORT}:8080"
+
+  api:
+    ports: !reset []
+
+  database:
+    ports: !reset []

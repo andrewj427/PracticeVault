@@ -1,0 +1,41 @@
+name: Deploy PracticeVault
+
+on:
+  workflow_run:
+    workflows: ["PracticeVault CI"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Copy project to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          source: "."
+          target: "/home/${{ secrets.SERVER_USERNAME }}/PracticeVault"
+
+      - name: Start application
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USERNAME }}/PracticeVault
+
+            export EXTERNAL_PORT="${{ secrets.EXTERNAL_PORT }}"
+            export MSSQL_SA_PASSWORD="${{ secrets.MSSQL_SA_PASSWORD }}"
+
+            sudo -E docker compose -f compose.yaml -f compose.prod.yaml up -d --build
