@@ -1,0 +1,31 @@
+name: PracticeVault CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore PracticeVault.sln
+
+      - name: Build solution
+        run: dotnet build PracticeVault.sln --no-restore
+
+      - name: Run unit tests
+        run: dotnet test PracticeVault.sln --no-build
