@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PracticeVaultAPI.Data;
 using PracticeVaultAPI.Models;
 
 namespace PracticeVaultAPI.Controllers
@@ -10,75 +11,14 @@ namespace PracticeVaultAPI.Controllers
         [HttpGet]
         public IActionResult GetSongs()
         {
-            var songs = new List<Song>
-            {
-                new Song
-                {
-                    Id = 1,
-                    Title = "Hail to the King",
-                    Artist = "Avenged Sevenfold",
-                    Album = "Hail to the King",
-                    DurationSeconds = 304
-                },
-
-                new Song
-                {
-                    Id = 2,
-                    Title = "Bat Country",
-                    Artist = "Avenged Sevenfold",
-                    Album = "City of Evil",
-                    DurationSeconds = 312
-                },
-
-                new Song
-                {
-                    Id = 3,
-                    Title = "November Rain",
-                    Artist = "Guns N' Roses",
-                    Album = "Use Your Illusion I",
-                    DurationSeconds = 537
-                }
-            };
-
+            var songs = _songRepository.GetAll();
             return Ok(songs);
         }
     
-
-
-    [HttpGet("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetSong(int id)
         {
-            var songs = new List<Song>
-    {
-        new Song
-        {
-            Id = 1,
-            Title = "Hail to the King",
-            Artist = "Avenged Sevenfold",
-            Album = "Hail to the King",
-            DurationSeconds = 304
-        },
-
-        new Song
-        {
-            Id = 2,
-            Title = "Bat Country",
-            Artist = "Avenged Sevenfold",
-            Album = "City of Evil",
-            DurationSeconds = 312
-        },
-
-        new Song
-        {
-            Id = 3,
-            Title = "November Rain",
-            Artist = "Guns N' Roses",
-            Album = "Use Your Illusion I",
-            DurationSeconds = 537
-        }
-    };
-
-            var song = songs.FirstOrDefault(s => s.Id == id);
+            var song = _songRepository.GetById(id);
 
             if (song == null)
             {
@@ -87,4 +27,24 @@ namespace PracticeVaultAPI.Controllers
 
             return Ok(song);
         }
-    } }
+        private readonly ISongRepository _songRepository;
+
+        public SongsController(ISongRepository songRepository)
+        {
+            _songRepository = songRepository;
+        }
+        [HttpPost]
+        public IActionResult CreateSong(Song song)
+        {
+            int id = _songRepository.Create(song);
+
+            song.Id = id;
+
+            return CreatedAtAction(
+                nameof(GetSong),
+                new { id = id },
+                song
+            );
+        }
+    }
+}

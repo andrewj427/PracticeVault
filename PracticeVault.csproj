@@ -14,9 +14,17 @@
 		<Content Remove="PracticeVaultAPI\**\*" />
 		<EmbeddedResource Remove="PracticeVaultAPI\**\*" />
 		<None Remove="PracticeVaultAPI\**\*" />
-	</ItemGroup>
 
-	<ItemGroup>
+		<Compile Remove="PracticeVault.Tests\**\*.cs" />
+		<Content Remove="PracticeVault.Tests\**\*" />
+		<EmbeddedResource Remove="PracticeVault.Tests\**\*" />
+		<None Remove="PracticeVault.Tests\**\*" />
+
+		<Compile Remove="PracticeVaultAPI.Tests\**\*.cs" />
+		<Content Remove="PracticeVaultAPI.Tests\**\*" />
+		<EmbeddedResource Remove="PracticeVaultAPI.Tests\**\*" />
+		<None Remove="PracticeVaultAPI.Tests\**\*" />
+	
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
 	</ItemGroup>
 
