@@ -43,5 +43,19 @@ namespace PracticeVaultAPI.Tests
 
             return song.Id;
         }
+        public bool Update(Song song)
+        {
+            var existingSong = _songs.FirstOrDefault(s => s.Id == song.Id);
+
+            if (existingSong == null)
+                return false;
+
+            existingSong.Title = song.Title;
+            existingSong.Artist = song.Artist;
+            existingSong.Album = song.Album;
+            existingSong.DurationSeconds = song.DurationSeconds;
+
+            return true;
+        }
     }
 }

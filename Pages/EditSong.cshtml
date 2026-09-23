@@ -1,68 +1,66 @@
 ﻿@page
 @model PracticeVault.Pages.EditSongModel
 @{
-	ViewData["Title"] = "Edit Song";
+    ViewData["Title"] = "Edit Song";
 }
-
 
 <div class="song-form-page">
     <h2>Edit Song</h2>
 
     <form method="post">
+
+        <input type="hidden" asp-for="Song.UserSongID" />
+        <input type="hidden" asp-for="Song.UserID" />
+        <input type="hidden" asp-for="Song.SongID" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="mb-3">
             <label class="form-label">Song Title</label>
-            <input type="text" class="form-control" placeholder="Song title" />
+            <input asp-for="Song.Title"
+                   class="form-control" />
         </div>
 
         <div class="mb-3">
             <label class="form-label">Artist</label>
-            <input type="text" class="form-control" placeholder="Artist name" />
+            <input asp-for="Song.Artist"
+                   class="form-control" />
         </div>
 
         <div class="mb-3">
             <label class="form-label">Album</label>
-            <input type="text" class="form-control" placeholder="Album (optional)" />
+            <input asp-for="Song.Album"
+                   class="form-control" />
         </div>
 
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label">Tuning</label>
-                <div class="d-flex gap-2">
-                    <select class="form-select form-select-sm" style="max-width: 90px;">
-                        <option value="e">E</option>
-                        <option value="eb">Eb / D#</option>
-                        <option value="d">D</option>
-                        <option value="db">Db / C#</option>
-                        <option value="c">C</option>
-                        <option value="b">B</option>
-                        <option value="bb">Bb/ A#</option>
-                        <option value="a">A</option>
-                        <option value="ab">Ab / G#</option>
-                        <option value="g">G</option>
-                        <option value="gb">Gb/ F#</option>
-                        <option value="f">F</option>
-                    </select>
 
-                    <select class="form-select"">
-                        <option value="standard">Standard</option>
-                        <option value="drop">Drop</option>
-                        <option value="open">Open</option>
-                        <option value="other">Other</option>
+                <select asp-for="Song.Tuning" class="form-select">
+                    <option value="E Standard">E Standard</option>
+                    <option value="Eb Standard">Eb Standard</option>
+                    <option value="D Standard">D Standard</option>
+                    <option value="C# Standard">C# Standard</option>
+                    <option value="C Standard">C Standard</option>
 
-                    </select>
-                </div>
+                    <option value="Drop D">Drop D</option>
+                    <option value="Drop C#">Drop C#</option>
+                    <option value="Drop C">Drop C</option>
+                    <option value="Drop B">Drop B</option>
+                    <option value="Drop A">Drop A</option>
+                </select>
             </div>
 
             <div class="col-md-6 mb-3">
                 <label class="form-label">Difficulty</label>
-                <select class="form-select">
-                    <option value="">Select difficulty</option>
+
+                <select asp-for="Song.Difficulty" class="form-select">
                     <option value="Easy">Easy</option>
                     <option value="Medium">Medium</option>
                     <option value="Hard">Hard</option>
                     <option value="Expert">Expert</option>
-                    <option value="Expertplus">Expert+</option>
-
+                    <option value="Expert+">Expert+</option>
                 </select>
             </div>
         </div>
@@ -70,7 +68,8 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="form-label">Status</label>
-                <select class="form-select">
+
+                <select asp-for="Song.Status" class="form-select">
                     <option value="Learn Later">Learn Later</option>
                     <option value="Learning">Learning</option>
                     <option value="Needs Work">Needs Work</option>
@@ -78,19 +77,34 @@
                 </select>
             </div>
 
+            
         </div>
+
+        
 
         <div class="mb-3">
             <label class="form-label">Tab Link</label>
-            <input type="text" class="form-control" placeholder="https://..." />
+
+            <input asp-for="Song.TabURL"
+                   class="form-control"
+                   placeholder="https://..." />
         </div>
 
         <div class="mb-3">
             <label class="form-label">Notes</label>
-            <textarea class="form-control" rows="3" placeholder="Practice notes..."></textarea>
+
+            <textarea asp-for="Song.Notes"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Practice notes..."></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Confirm</button>
-        <a asp-page="/Library" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">
+            Confirm
+        </button>
+
+        <a asp-page="/Library" class="btn btn-secondary">
+            Cancel
+        </a>
     </form>
 </div>

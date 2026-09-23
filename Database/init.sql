@@ -45,11 +45,8 @@ CREATE TABLE UserSongs
 
     Tuning VARCHAR(30),
     Difficulty VARCHAR(30),
-    BPM INT,
     TabURL VARCHAR(500),
     Notes VARCHAR(1000),
-
-    Progress INT NOT NULL DEFAULT 0,
     DateAdded DATETIME NOT NULL DEFAULT GETDATE(),
 
     FOREIGN KEY (UserID) REFERENCES Users(UserID),

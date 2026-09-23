@@ -33,18 +33,43 @@ namespace PracticeVaultAPI.Controllers
         {
             _songRepository = songRepository;
         }
+        
         [HttpPost]
-        public IActionResult CreateSong(Song song)
+        public IActionResult CreateSong([FromBody] Song song)
         {
-            int id = _songRepository.Create(song);
+            if (string.IsNullOrWhiteSpace(song.Title) ||
+                string.IsNullOrWhiteSpace(song.Artist))
+            {
+                return BadRequest("Title and artist are required.");
+            }
 
-            song.Id = id;
+            int newId = _songRepository.Create(song);
+
+            song.Id = newId;
 
             return CreatedAtAction(
                 nameof(GetSong),
-                new { id = id },
+                new { id = newId },
                 song
             );
+        }
+        [HttpPut("{id}")]
+        public IActionResult UpdateSong(int id, [FromBody] Song song)
+        {
+            if (string.IsNullOrWhiteSpace(song.Title) ||
+                string.IsNullOrWhiteSpace(song.Artist))
+            {
+                return BadRequest("Title and artist are required.");
+            }
+
+            song.Id = id;
+
+            bool updated = _songRepository.Update(song);
+
+            if (!updated)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
