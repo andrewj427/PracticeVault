@@ -56,35 +56,73 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td><a href="https://www.songsterr.com/a/wsa/trivium-the-heart-from-your-hate-solo-tab-s436515t0">The Heart From Your Hate</a></td>
-            <td>Trivium</td>
-            <td>Medium</td>
-            <td>Eb Standard</td>
-            <td>Easy beginning riff, 7 string tuning</td>
-            <td>Learning</td>
-            <td><a href="EditSong">Edit</a></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td><a href="https://www.songsterr.com/a/wsa/avenged-sevenfold-heretic-tab-s384661">Heretic</a></td>
-            <td>Avenged Sevenfold</td>
-            <td>Hard</td>
-            <td>Drop D</td>
-            <td>Cool solo</td>
-            <td>Learn Later</td>
-            <td><a href="EditSong">Edit</a></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-			<td><a href="https://www.songsterr.com/a/wsa/guns-n-roses-sweet-child-o-mine-tab-s23">Sweet Child O' Mine</a></td>
-            <td>Guns N' Roses</td>
-            <td>Medium</td>
-            <td>Eb Standard</td>
-            <td>75% speed on solo</td>
-            <td>Learning</td>
-            <td><a href="EditSong">Edit</a></td>
-        </tr>
+        @foreach (var song in Model.Songs)
+        {
+            <tr>
+                <td>@song.SongID</td>
+
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(song.TabURL))
+                    {
+                        <a href="@song.TabURL"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            @song.Title
+                        </a>
+                    }
+                    else
+                    {
+                        @song.Title
+                    }
+            </td>
+
+            <td>@song.Artist</td>
+
+            <td>
+                @(string.IsNullOrWhiteSpace(song.Difficulty)
+                                ? "-"
+                                : song.Difficulty)
+                                              </td>
+
+            <td>
+                @(string.IsNullOrWhiteSpace(song.Tuning)
+                                ? "-"
+                                : song.Tuning)
+                                          </td>
+
+            <td>
+                @(string.IsNullOrWhiteSpace(song.Notes)
+                                ? "-"
+                                : song.Notes)
+                                         </td>
+
+            <td>
+                @(string.IsNullOrWhiteSpace(song.Status)
+                                ? "-"
+                                : song.Status)
+            </td>
+
+                <td>
+                <td>
+                    <a asp-page="/EditSong"
+                       asp-route-id="@song.UserSongID"
+                       class="btn btn-sm btn-primary">
+                        Edit
+                    </a>
+
+                    <form method="post"
+                          asp-page-handler="Delete"
+                          asp-route-id="@song.UserSongID"
+                          class="d-inline"
+                          onsubmit="return confirm('Remove this song from your library?');">
+
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+                </td>
+            </tr>
+                }
     </tbody>
 </table>

@@ -7,5 +7,7 @@ namespace PracticeVaultAPI.Data
         List<Song> GetAll();
         Song? GetById(int id);
         int Create(Song song);
+
+        bool Update(Song song);
     }
 }

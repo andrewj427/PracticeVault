@@ -89,5 +89,33 @@ namespace PracticeVaultAPI.Data
 
             return (int)command.ExecuteScalar()!;
         }
+        public bool Update(Song song)
+        {
+            using SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            string sql = @"
+        UPDATE Songs
+        SET
+            Title = @Title,
+            Artist = @Artist,
+            Album = @Album,
+            DurationSeconds = @DurationSeconds
+        WHERE SongID = @SongID;";
+
+            using SqlCommand command = new SqlCommand(sql, connection);
+
+            command.Parameters.AddWithValue("@SongID", song.Id);
+            command.Parameters.AddWithValue("@Title", song.Title);
+            command.Parameters.AddWithValue("@Artist", song.Artist);
+            command.Parameters.AddWithValue(
+                "@Album",
+                (object?)song.Album ?? DBNull.Value);
+            command.Parameters.AddWithValue(
+                "@DurationSeconds",
+                (object?)song.DurationSeconds ?? DBNull.Value);
+
+            return command.ExecuteNonQuery() > 0;
+        }
     }
 }
